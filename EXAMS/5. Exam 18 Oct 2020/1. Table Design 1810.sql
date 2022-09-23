@@ -1,0 +1,54 @@
+CREATE DATABASE exam181020;
+USE exam181020;
+
+CREATE TABLE pictures(
+id INT PRIMARY KEY AUTO_INCREMENT,
+url VARCHAR(100) NOT NULL,
+added_on DATETIME NOT NULL
+);
+
+CREATE TABLE categories(
+id INT PRIMARY KEY AUTO_INCREMENT,
+`name`  VARCHAR(40) NOT NULL UNIQUE
+);
+
+CREATE TABLE products (
+id INT PRIMARY KEY AUTO_INCREMENT,
+`name`  VARCHAR(40) NOT NULL UNIQUE,
+best_before DATE,
+price DECIMAL(10,2) NOT NULL,
+`description` TEXT,
+category_id INT NOT NULL,
+picture_id INT NOT NULL,
+CONSTRAINT fk_category_products
+FOREIGN KEY (category_id)
+REFERENCES categories (id),
+CONSTRAINT fk_pictures_products
+FOREIGN KEY (picture_id)
+REFERENCES pictures (id)
+);
+
+CREATE TABLE towns (
+id INT PRIMARY KEY AUTO_INCREMENT,
+`name`  VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE addresses(
+id INT PRIMARY KEY AUTO_INCREMENT,
+`name`  VARCHAR(50) NOT NULL UNIQUE,
+town_id INT NOT NULL,
+CONSTRAINT fk_addresses_towns
+FOREIGN KEY (town_id)
+REFERENCES towns (id)
+);
+
+CREATE TABLE stores(
+id INT PRIMARY KEY AUTO_INCREMENT,
+`name`  VARCHAR(20) NOT NULL UNIQUE,
+rating FLOAT NOT NULL,
+has_parking BOOLEAN DEFAULT FALSE,
+address_id INT NOT NULL,
+CONSTRAINT fk_addresses_stores
+FOREIGN KEY (address_id)
+REFERENCES addresses (id)
+);
