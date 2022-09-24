@@ -1,6 +1,7 @@
 -- 2-----------------------------------
 INSERT INTO addresses (address, town, country, user_id)
 SELECT username, `password`, ip, age
+-- SELECT (username, `password`, ip, age) -- not working
 FROM users 
 WHERE gender = 'M';
 

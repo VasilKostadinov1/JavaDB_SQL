@@ -44,7 +44,9 @@ REFERENCES photos(`id`)
 CREATE TABLE users_photos(
 user_id INT NOT NULL,
 photo_id  INT NOT NULL,
-KEY pk_users_photos(user_id, photo_id),
+-- CONSTRAINT pk_user_photo               -- 26/40  ??? 
+-- PRIMARY KEY (user_id, photo_id),       -- 26/40  ???
+KEY pk_users_photos(user_id, photo_id),  -- COMPOSITE -- 40/40
 CONSTRAINT user_photes_photos
 FOREIGN KEY (`photo_id`) 
 REFERENCES photos(`id`),
